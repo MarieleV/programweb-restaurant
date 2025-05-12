@@ -4,9 +4,20 @@ const Cliente = require('../models/clienteModel');
 const clienteController = {
   criar: async (req, res, next) => {
     try {
-      const { nome, cpf, email, senha } = req.body;
-      const idUsuario = await Usuario.criar({ nome, cpf, email, senha });
+      const { nome, email, telefone, cpf, senha } = req.body;
+
+      // Verificar se todos os dados obrigatórios foram preenchidos
+      if (!nome || !email || !telefone || !cpf || !senha) {
+        return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
+      }
+
+      // Criar o usuário (não precisamos de token aqui)
+      const idUsuario = await Usuario.criar({ nome, email, telefone, cpf, senha });
+
+      // Criar o cliente com base no id do usuário
       const idCliente = await Cliente.criar(idUsuario);
+
+      // Retornar a resposta de sucesso
       res.status(201).json({ idCliente, message: 'Cliente criado com sucesso' });
     } catch (error) {
       next(error);
