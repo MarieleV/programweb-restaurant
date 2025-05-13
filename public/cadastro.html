@@ -6,7 +6,6 @@
     <title>Cadastro - Camargo Restaurante</title>
     <link rel="stylesheet" href="css/cadastro.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 </head>
 <body class="pagina-cadastro">
 
@@ -14,7 +13,7 @@
         <!-- (Cadastro) -->
         <div class="left-section">
             <h2>Cadastrar-se</h2>
-            <form>
+            <form id="formCadastro">
                 <div class="form-group">
                     <label for="nome">Nome Completo</label>
                     <input type="text" id="nome" placeholder="Digite seu nome">
@@ -51,8 +50,6 @@
         </div>
     </div>
 
-
-
     <!-- Senha, confirme senha -->
     <div id="modalErroSenhas" class="modal">
         <div class="modal-login-content">
@@ -61,18 +58,15 @@
             <button id="btnFecharErroSenhas">OK</button>
         </div>
     </div>
-    
-
 
     <!-- Erro de Cadastro -->
     <div id="modalErroCampos" class="modal modal-cadastro-erro">
         <div class="modal-content modal-cadastro-content">
-            <p class="mensagem-erro cadastro-msg"> Erro no Cadastro!</p>
+            <p class="mensagem-erro cadastro-msg">Erro no Cadastro!</p>
             <p class="mensagem-ajuda-cadastro">Preencha os Campos Obrigatórios</p>
             <button id="btnFecharErroCadastro">Ok</button>
         </div>
     </div>
-
 
     <!-- Erro de Cadastro 2 (Carregamento) -->
     <div id="modalErroCarregamentoCadastro" class="modal modal-carregamento-erro">
@@ -81,7 +75,7 @@
             <p class="mensagem-ajuda">Tente Novamente!</p>
             <button id="btnFecharErroCarregamentoCadastro">Ok</button>
         </div>
-     </div>
+    </div>
 
     <script src="js/cadastro.js"></script>
 </body>
