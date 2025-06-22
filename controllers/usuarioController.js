@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
 
+
 // Criar novo usuário
 exports.criarUsuario = async (req, res) => {
   const { nome_Usuario, cpf_Usuario, email_Usuario, telefone_Usuario, senha_Usuario } = req.body;
@@ -60,27 +61,57 @@ exports.buscarUsuarioPorId = async (req, res) => {
 // Atualizar usuário
 exports.atualizarUsuario = async (req, res) => {
   const { id } = req.params;
-  const { nome_Usuario, email_Usuario, telefone_Usuario } = req.body;
+  const { nome_Usuario, email_Usuario, telefone_Usuario, senha_Usuario } = req.body; // <-- Adicionado senha_Usuario aqui
 
   if (!nome_Usuario || !email_Usuario) {
     return res.status(400).json({ message: 'Nome e e-mail são obrigatórios para atualizar.' });
   }
 
   try {
-    const [result] = await db.execute(
-      'UPDATE Usuario SET nome_Usuario = ?, email_Usuario = ?, telefone_Usuario = ? WHERE id = ?',
-      [nome_Usuario, email_Usuario, telefone_Usuario || null, id]
-    );
+    let hashedPassword = null;
+    if (senha_Usuario) {
+        hashedPassword = await bcrypt.hash(senha_Usuario, 10); // Criptografa a nova senha
+    }
+
+    // Prepara os campos a serem atualizados
+    const campos = [];
+    const valores = [];
+
+    if (nome_Usuario !== undefined) {
+        campos.push('nome_Usuario = ?');
+        valores.push(nome_Usuario);
+    }
+    if (email_Usuario !== undefined) {
+        campos.push('email_Usuario = ?');
+        valores.push(email_Usuario);
+    }
+    if (telefone_Usuario !== undefined) {
+        campos.push('telefone_Usuario = ?');
+        valores.push(telefone_Usuario);
+    }
+    if (hashedPassword !== null) { // Se uma nova senha foi fornecida e criptografada
+        campos.push('senha_Usuario = ?');
+        valores.push(hashedPassword);
+    }
+
+    if (campos.length === 0) {
+        return res.status(400).json({ message: 'Nenhum dado válido fornecido para atualização.' });
+    }
+
+    valores.push(id); // Adiciona o ID no final para a cláusula WHERE
+
+    const sql = `UPDATE Usuario SET ${campos.join(', ')} WHERE id = ?`;
+const [result] = await db.execute(sql, valores);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Usuário não encontrado para atualização.' });
     }
 
-    res.json({ message: 'Usuário atualizado com sucesso' });
-  } catch (err) {
-    console.error('Erro ao atualizar usuário:', err);
-    res.status(500).json({ error: 'Erro ao atualizar usuário', details: err.message });
-  }
+res.json({ message: 'Usuário atualizado com sucesso' });
+} catch (err) {
+console.error('Erro ao atualizar usuário:', err);
+res.status(500).json({ error: 'Erro ao atualizar usuário', details: err.message });
+}
 };
 
 // Deletar usuário
