@@ -66,6 +66,11 @@ Organização das tarefas:
 
 Mariele Vieira: Back-End: JavaScript (Node.js e Express.js) e Banco de Dados: MySQL; 
 
+
+
+Obs: fazer funcionar:
+Ligar o xampp e no terminal escrever node app.js
+
 Maria Giuliari: Front-End: JavaScript (React.js) e Autentificação: JWT (JSON Web Token);
 
 Equipe: Maria Giuliari e Mariele
