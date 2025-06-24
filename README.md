@@ -6,7 +6,7 @@ Funcionalidades principais:
 
 CRUD de clientes: cadastro de clientes (nome, email, telefone, senha), edição e exclusão de cadastro, lista dos clientes cadastrados.
 
-CRUD de reservas: criação de reserva (cliente, data, número de pessoas), edição e exclusão de reservas, lista das reservas ativas. 
+CRUD de reservas: criação de reserva (data, horário, número de pessoas), edição e exclusão de reservas, lista das reservas ativas. 
 
 Transação: tanto o cliente quanto o restaurante podem confirmar uma reserva, garantindo que a mesa será disponibilizada; ambos também poderão cancelar uma reserva, assim liberando a mesa para outras reservas. 
 
@@ -18,7 +18,7 @@ RF002: o sistema deve permitir que os clientes editem e excluam os seus cadastro
 
 RF003: o sistema deve permitir a visualização da lista de clientes cadastrados pelos administradores. 
 
-RF004: o sistema deve permitir que os clientes realizem reservas informando data e número de pessoas.  
+RF004: o sistema deve permitir que os clientes realizem reservas informando data, número de pessoas e horário.  
 
 RF005: o sistema deve permitir a edição ou cancelamento de reservas. 
 
@@ -54,7 +54,7 @@ Tipo de Arquitetura: Monolítica - projetar já com separação lógica clara en
 
 Principais tecnologias: 
 
-Front-End: JavaScript (React.js): é uma biblioteca moderna, robusta e muito bem exigida no ecossistema web. Sua abordagem baseada em componentes facilita tanto a manutenção quanto a escalabilidade da interface. Além disso, o React permite a criação de aplicativos de página única (SPA), o que melhora significativamente a experiência do usuário para evitar recarregamentos constantes da página.
+Front-End: JavaScript 
 
 Back-End: JavaScript (Node.js e Express.js): o Node oferece um ambiente leve e eficiente, tanto para aplicações que excluem múltiplas requisições simultâneas, como um sistema de reservas. O Express, por sua vez, adiciona uma camada de estrutura ao Node, permitindo a organização mais clara de rotas e lógica de negócio.
 
@@ -71,7 +71,7 @@ Mariele Vieira: Back-End: JavaScript (Node.js e Express.js) e Banco de Dados: My
 Obs: fazer funcionar:
 Ligar o xampp e no terminal escrever node app.js
 
-Maria Giuliari: Front-End: JavaScript (React.js) e Autentificação: JWT (JSON Web Token);
+Maria Giuliari: Front-End: JavaScript e Autentificação: JWT (JSON Web Token);
 
 Equipe: Maria Giuliari e Mariele
 
